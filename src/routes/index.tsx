@@ -42,20 +42,86 @@ function AdBanner({ etiqueta }: { etiqueta: string }) {
 function Index() {
   const [consulta, setConsulta] = useState("");
   const [destino, setDestino] = useState<Ciudad | null>(null);
+  const [sugerencias, setSugerencias] = useState<SugerenciaNominatim[]>([]);
+  const [cargando, setCargando] = useState(false);
+  const [abierto, setAbierto] = useState(false);
+  const ignorarRef = useRef(false);
 
-  const sugerencias = useMemo(() => {
-    const q = consulta.trim().toLowerCase();
-    if (!q) return [];
-    return CIUDADES.filter(
-      (c) =>
-        c.nombre.toLowerCase().includes(q) ||
-        c.region.toLowerCase().includes(q),
-    ).slice(0, 6);
+  // Buscar municipios reales con la API gratuita de Nominatim (OpenStreetMap).
+  useEffect(() => {
+    const q = consulta.trim();
+    if (ignorarRef.current) {
+      ignorarRef.current = false;
+      return;
+    }
+    if (q.length < 3) {
+      setSugerencias([]);
+      setCargando(false);
+      return;
+    }
+
+    const controlador = new AbortController();
+    setCargando(true);
+    const t = setTimeout(async () => {
+      try {
+        const url =
+          "https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=6&countrycodes=es&accept-language=es&q=" +
+          encodeURIComponent(q);
+        const res = await fetch(url, { signal: controlador.signal });
+        const datos: Array<{
+          display_name: string;
+          name?: string;
+          lat: string;
+          lon: string;
+          address?: Record<string, string>;
+        }> = await res.json();
+
+        const items: SugerenciaNominatim[] = datos.map((d) => {
+          const a = d.address ?? {};
+          const nombreCorto =
+            d.name ||
+            a.city ||
+            a.town ||
+            a.village ||
+            a.municipality ||
+            d.display_name.split(",")[0];
+          const detalle = [a.province || a.county, a.state]
+            .filter(Boolean)
+            .join(", ");
+          return {
+            display_name: d.display_name,
+            nombreCorto,
+            detalle: detalle || "España",
+            lat: parseFloat(d.lat),
+            lon: parseFloat(d.lon),
+          };
+        });
+        setSugerencias(items);
+        setAbierto(true);
+      } catch (e) {
+        if ((e as Error).name !== "AbortError") setSugerencias([]);
+      } finally {
+        setCargando(false);
+      }
+    }, 350);
+
+    return () => {
+      controlador.abort();
+      clearTimeout(t);
+    };
   }, [consulta]);
 
-  const seleccionar = (c: Ciudad) => {
-    setDestino({ ...c });
-    setConsulta(c.nombre);
+  const seleccionar = (s: SugerenciaNominatim) => {
+    ignorarRef.current = true;
+    setDestino({
+      nombre: s.nombreCorto,
+      region: s.detalle,
+      lat: s.lat,
+      lon: s.lon,
+    });
+    setConsulta(s.nombreCorto);
+    setSugerencias([]);
+    setAbierto(false);
   };
 
   return (
