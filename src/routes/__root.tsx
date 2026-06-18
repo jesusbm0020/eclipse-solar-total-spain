@@ -76,20 +76,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1" },
+      { title: "Eclipse Solar Total 2026 España | Mapa Interactivo" },
+      {
+        name: "description",
+        content:
+          "Mapa interactivo del eclipse solar total del 12 de agosto de 2026 en España. Consulta horarios, porcentaje de oscurecimiento y zonas de totalidad.",
+      },
+      { name: "author", content: "Eclipse España 2026" },
+      { property: "og:title", content: "Eclipse Solar Total 2026 España" },
+      {
+        property: "og:description",
+        content: "Mapa interactivo del eclipse solar total del 12 de agosto de 2026 en España.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap",
       },
     ],
   }),
