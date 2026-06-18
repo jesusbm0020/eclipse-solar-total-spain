@@ -161,26 +161,32 @@ function Index() {
               <input
                 value={consulta}
                 onChange={(e) => setConsulta(e.target.value)}
-                placeholder="Busca tu ciudad o pueblo..."
-                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-                aria-label="Buscar ciudad"
+                onFocus={() => sugerencias.length > 0 && setAbierto(true)}
+                placeholder="Busca cualquier ciudad o pueblo de España..."
+                className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+                aria-label="Buscar ciudad o pueblo"
               />
+              {cargando && (
+                <Loader2 className="h-4 w-4 shrink-0 animate-spin text-primary" />
+              )}
             </div>
 
-            {sugerencias.length > 0 && (
+            {abierto && sugerencias.length > 0 && (
               <ul className="absolute z-[1000] mt-2 w-full overflow-hidden rounded-2xl border border-border bg-popover shadow-xl">
-                {sugerencias.map((c) => (
-                  <li key={c.nombre}>
+                {sugerencias.map((s) => (
+                  <li key={s.display_name}>
                     <button
                       type="button"
-                      onClick={() => seleccionar(c)}
+                      onClick={() => seleccionar(s)}
                       className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition-colors hover:bg-secondary"
                     >
                       <MapPin className="h-4 w-4 shrink-0 text-primary" />
                       <span className="min-w-0">
-                        <span className="block truncate font-medium">{c.nombre}</span>
+                        <span className="block truncate font-medium text-popover-foreground">
+                          {s.nombreCorto}
+                        </span>
                         <span className="block truncate text-xs text-muted-foreground">
-                          {c.region}
+                          {s.detalle}
                         </span>
                       </span>
                     </button>
