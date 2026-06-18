@@ -1,9 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { Search, Sun, Glasses, MapPin } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Search, Sun, Glasses, MapPin, Loader2 } from "lucide-react";
 import { EclipseMap } from "@/components/EclipseMap";
-import { CIUDADES, type Ciudad } from "@/lib/eclipse-data";
+import { type Ciudad } from "@/lib/eclipse-data";
 import { Button } from "@/components/ui/button";
+
+interface SugerenciaNominatim {
+  display_name: string;
+  nombreCorto: string;
+  detalle: string;
+  lat: number;
+  lon: number;
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
