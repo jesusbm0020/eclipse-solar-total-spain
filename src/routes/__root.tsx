@@ -84,13 +84,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Mapa interactivo del eclipse solar total del 12 de agosto de 2026 en España. Consulta horarios, porcentaje de oscurecimiento y zonas de totalidad.",
       },
       { name: "author", content: "Eclipse España 2026" },
-      { property: "og:title", content: "Eclipse Solar Total 2026 España" },
+      { property: "og:title", content: "Eclipse Solar Total 2026 España | Mapa Interactivo" },
       {
         property: "og:description",
         content: "Mapa interactivo del eclipse solar total del 12 de agosto de 2026 en España.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Eclipse Solar Total 2026 España | Mapa Interactivo" },
+      { name: "description", content: "\"Mapa interactivo para consultar los horarios y la visibilidad del eclipse solar total del 12 de agosto de 2026 en España" },
+      { property: "og:description", content: "\"Mapa interactivo para consultar los horarios y la visibilidad del eclipse solar total del 12 de agosto de 2026 en España" },
+      { name: "twitter:description", content: "\"Mapa interactivo para consultar los horarios y la visibilidad del eclipse solar total del 12 de agosto de 2026 en España" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5a98facf-ca16-4cd2-8b68-2240d49fb272" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5a98facf-ca16-4cd2-8b68-2240d49fb272" },
     ],
     links: [
       {
