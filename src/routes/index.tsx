@@ -1,9 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { Search, Sun, Glasses, MapPin } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Search, Sun, Glasses, MapPin, Loader2 } from "lucide-react";
 import { EclipseMap } from "@/components/EclipseMap";
-import { CIUDADES, type Ciudad } from "@/lib/eclipse-data";
+import { type Ciudad } from "@/lib/eclipse-data";
 import { Button } from "@/components/ui/button";
+
+interface SugerenciaNominatim {
+  display_name: string;
+  nombreCorto: string;
+  detalle: string;
+  lat: number;
+  lon: number;
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,20 +42,86 @@ function AdBanner({ etiqueta }: { etiqueta: string }) {
 function Index() {
   const [consulta, setConsulta] = useState("");
   const [destino, setDestino] = useState<Ciudad | null>(null);
+  const [sugerencias, setSugerencias] = useState<SugerenciaNominatim[]>([]);
+  const [cargando, setCargando] = useState(false);
+  const [abierto, setAbierto] = useState(false);
+  const ignorarRef = useRef(false);
 
-  const sugerencias = useMemo(() => {
-    const q = consulta.trim().toLowerCase();
-    if (!q) return [];
-    return CIUDADES.filter(
-      (c) =>
-        c.nombre.toLowerCase().includes(q) ||
-        c.region.toLowerCase().includes(q),
-    ).slice(0, 6);
+  // Buscar municipios reales con la API gratuita de Nominatim (OpenStreetMap).
+  useEffect(() => {
+    const q = consulta.trim();
+    if (ignorarRef.current) {
+      ignorarRef.current = false;
+      return;
+    }
+    if (q.length < 3) {
+      setSugerencias([]);
+      setCargando(false);
+      return;
+    }
+
+    const controlador = new AbortController();
+    setCargando(true);
+    const t = setTimeout(async () => {
+      try {
+        const url =
+          "https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=6&countrycodes=es&accept-language=es&q=" +
+          encodeURIComponent(q);
+        const res = await fetch(url, { signal: controlador.signal });
+        const datos: Array<{
+          display_name: string;
+          name?: string;
+          lat: string;
+          lon: string;
+          address?: Record<string, string>;
+        }> = await res.json();
+
+        const items: SugerenciaNominatim[] = datos.map((d) => {
+          const a = d.address ?? {};
+          const nombreCorto =
+            d.name ||
+            a.city ||
+            a.town ||
+            a.village ||
+            a.municipality ||
+            d.display_name.split(",")[0];
+          const detalle = [a.province || a.county, a.state]
+            .filter(Boolean)
+            .join(", ");
+          return {
+            display_name: d.display_name,
+            nombreCorto,
+            detalle: detalle || "España",
+            lat: parseFloat(d.lat),
+            lon: parseFloat(d.lon),
+          };
+        });
+        setSugerencias(items);
+        setAbierto(true);
+      } catch (e) {
+        if ((e as Error).name !== "AbortError") setSugerencias([]);
+      } finally {
+        setCargando(false);
+      }
+    }, 350);
+
+    return () => {
+      controlador.abort();
+      clearTimeout(t);
+    };
   }, [consulta]);
 
-  const seleccionar = (c: Ciudad) => {
-    setDestino({ ...c });
-    setConsulta(c.nombre);
+  const seleccionar = (s: SugerenciaNominatim) => {
+    ignorarRef.current = true;
+    setDestino({
+      nombre: s.nombreCorto,
+      region: s.detalle,
+      lat: s.lat,
+      lon: s.lon,
+    });
+    setConsulta(s.nombreCorto);
+    setSugerencias([]);
+    setAbierto(false);
   };
 
   return (
@@ -87,26 +161,32 @@ function Index() {
               <input
                 value={consulta}
                 onChange={(e) => setConsulta(e.target.value)}
-                placeholder="Busca tu ciudad o pueblo..."
-                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-                aria-label="Buscar ciudad"
+                onFocus={() => sugerencias.length > 0 && setAbierto(true)}
+                placeholder="Busca cualquier ciudad o pueblo de España..."
+                className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+                aria-label="Buscar ciudad o pueblo"
               />
+              {cargando && (
+                <Loader2 className="h-4 w-4 shrink-0 animate-spin text-primary" />
+              )}
             </div>
 
-            {sugerencias.length > 0 && (
+            {abierto && sugerencias.length > 0 && (
               <ul className="absolute z-[1000] mt-2 w-full overflow-hidden rounded-2xl border border-border bg-popover shadow-xl">
-                {sugerencias.map((c) => (
-                  <li key={c.nombre}>
+                {sugerencias.map((s) => (
+                  <li key={s.display_name}>
                     <button
                       type="button"
-                      onClick={() => seleccionar(c)}
+                      onClick={() => seleccionar(s)}
                       className="flex w-full items-center gap-3 px-4 py-3 text-left text-sm transition-colors hover:bg-secondary"
                     >
                       <MapPin className="h-4 w-4 shrink-0 text-primary" />
                       <span className="min-w-0">
-                        <span className="block truncate font-medium">{c.nombre}</span>
+                        <span className="block truncate font-medium text-popover-foreground">
+                          {s.nombreCorto}
+                        </span>
                         <span className="block truncate text-xs text-muted-foreground">
-                          {c.region}
+                          {s.detalle}
                         </span>
                       </span>
                     </button>
