@@ -4,7 +4,7 @@
 // Los horarios y oscurecimientos son simulados pero coherentes con la
 // trayectoria real; la posición del Sol se calcula con la librería suncalc.
 
-import SunCalc from "suncalc";
+import * as SunCalc from "suncalc";
 
 export interface Ciudad {
   nombre: string;
