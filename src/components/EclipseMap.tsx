@@ -138,7 +138,9 @@ export function EclipseMap({ destino }: EclipseMapProps) {
         .bindPopup(popupHtml(destino.nombre, destino.lat, destino.lon))
         .openPopup();
       markerRef.current = marker;
+      dibujarFlecha(destino.lat, destino.lon);
     })();
+
   }, [destino]);
 
   return (
