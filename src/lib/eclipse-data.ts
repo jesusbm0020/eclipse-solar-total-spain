@@ -131,11 +131,12 @@ export function posicionSol(lat: number, lon: number): PosicionSol {
   // Máximo aproximado del eclipse: ~21:20 CEST = 19:20 UTC del 12 ago 2026.
   const fecha = new Date("2026-08-12T19:20:00Z");
   const pos = SunCalc.getPosition(fecha, lat, lon);
-  // suncalc: azimut medido desde el Sur, en sentido horario (rad).
-  // Convertir a brújula (0 = Norte, sentido horario).
-  let azimut = (pos.azimuth * 180) / Math.PI + 180;
+  // Esta versión de suncalc devuelve grados.
+  // azimut medido desde el Sur; convertir a brújula (0 = Norte).
+  let azimut = pos.azimuth + 180;
   azimut = ((azimut % 360) + 360) % 360;
-  const elevacion = (pos.altitude * 180) / Math.PI;
+  const elevacion = pos.altitude;
+
   return {
     azimut: Math.round(azimut),
     elevacion: Math.round(elevacion),
