@@ -62,6 +62,25 @@ export function EclipseMap({ destino }: EclipseMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const markerRef = useRef<Marker | null>(null);
+  const flechaRef = useRef<Polyline | null>(null);
+
+  // Dibuja la flecha amarilla apuntando hacia el Sol desde el punto dado.
+  async function dibujarFlecha(lat: number, lon: number) {
+    const L = await import("leaflet");
+    const map = mapRef.current;
+    if (!map) return;
+    const { sol } = calcularEclipse(lat, lon);
+    const fin = puntoEnDireccion(lat, lon, sol.azimut, 45);
+    // Pequeñas "alas" para formar la punta de la flecha.
+    const alaIzq = puntoEnDireccion(fin[0], fin[1], sol.azimut + 150, 12);
+    const alaDer = puntoEnDireccion(fin[0], fin[1], sol.azimut - 150, 12);
+    flechaRef.current?.remove();
+    flechaRef.current = L.polyline(
+      [[lat, lon], fin, alaIzq, fin, alaDer],
+      { color: "#ffd24a", weight: 4, opacity: 0.6, lineCap: "round" },
+    ).addTo(map);
+  }
+
 
   useEffect(() => {
     let cancelado = false;
