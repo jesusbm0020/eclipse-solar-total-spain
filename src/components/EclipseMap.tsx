@@ -66,11 +66,13 @@ function puntoEnDireccion(
 }
 
 
-export function EclipseMap({ destino }: EclipseMapProps) {
+export function EclipseMap({ destino, onSeleccion }: EclipseMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const markerRef = useRef<Marker | null>(null);
   const flechaRef = useRef<Polyline | null>(null);
+  const onSeleccionRef = useRef(onSeleccion);
+  onSeleccionRef.current = onSeleccion;
 
   // Dibuja la flecha amarilla apuntando hacia el Sol desde el punto dado.
   async function dibujarFlecha(lat: number, lon: number) {
