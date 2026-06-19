@@ -211,7 +211,10 @@ function Index() {
             size="lg"
             className="font-display h-14 w-full rounded-2xl text-base font-bold"
             onClick={() =>
-              window.open("https://www.google.com/search?q=gafas+eclipse+homologadas+ISO+12312-2", "_blank")
+              window.open(
+                "https://www.amazon.es/s?k=gafas+eclipse+solar+homologadas+iso&tag=eclipse202604-21",
+                "_blank",
+              )
             }
           >
             <Glasses className="mr-2 h-5 w-5" />
