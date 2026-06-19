@@ -121,7 +121,9 @@ export function EclipseMap({ destino, onSeleccion }: EclipseMapProps) {
           .setContent(popupHtml("Ubicación seleccionada", lat, lng))
           .openOn(map);
         dibujarFlecha(lat, lng);
+        onSeleccionRef.current?.({ titulo: "Ubicación seleccionada", lat, lon: lng });
       });
+
 
 
       // Forzar recalculo de tamaño tras montar.
