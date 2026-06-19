@@ -151,6 +151,11 @@ export function EclipseMap({ destino, onSeleccion }: EclipseMapProps) {
         .openPopup();
       markerRef.current = marker;
       dibujarFlecha(destino.lat, destino.lon);
+      onSeleccionRef.current?.({
+        titulo: destino.nombre,
+        lat: destino.lat,
+        lon: destino.lon,
+      });
     })();
 
   }, [destino]);
@@ -158,7 +163,7 @@ export function EclipseMap({ destino, onSeleccion }: EclipseMapProps) {
   return (
     <div
       ref={containerRef}
-      className="h-[58vh] min-h-[360px] w-full rounded-2xl border border-border"
+      className="h-full min-h-[320px] w-full rounded-2xl border border-border"
       style={{ boxShadow: "var(--shadow-glow)" }}
     />
   );
