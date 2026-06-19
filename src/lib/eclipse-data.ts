@@ -126,15 +126,22 @@ function alturaTexto(elevacion: number): string {
   return "Alto";
 }
 
-// Calcula la posición del Sol en el momento del máximo del eclipse.
-export function posicionSol(lat: number, lon: number): PosicionSol {
-  // Máximo aproximado del eclipse: ~21:20 CEST = 19:20 UTC del 12 ago 2026.
-  const fecha = new Date("2026-08-12T19:20:00Z");
+// Calcula la posición del Sol para una hora dada (minutos CEST) del 12 ago 2026.
+export function posicionSol(
+  lat: number,
+  lon: number,
+  minutosCEST: number,
+): PosicionSol {
+  // CEST = UTC + 2. Construimos la fecha en UTC.
+  const utcMin = minutosCEST - 120;
+  const h = Math.floor(utcMin / 60);
+  const m = Math.round(utcMin % 60);
+  const fecha = new Date(
+    `2026-08-12T${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:00Z`,
+  );
   const pos = SunCalc.getPosition(fecha, lat, lon);
-  // Esta versión de suncalc devuelve grados.
-  // azimut medido desde el Sur; convertir a brújula (0 = Norte).
-  let azimut = pos.azimuth + 180;
-  azimut = ((azimut % 360) + 360) % 360;
+  // Esta versión de suncalc devuelve grados y el azimut ya en brújula (0 = N).
+  const azimut = ((pos.azimuth % 360) + 360) % 360;
   const elevacion = pos.altitude;
 
   return {
@@ -144,6 +151,7 @@ export function posicionSol(lat: number, lon: number): PosicionSol {
     alturaTexto: alturaTexto(elevacion),
   };
 }
+
 
 // Genera datos deterministas y coherentes con la trayectoria real.
 export function calcularEclipse(lat: number, lon: number): DatosEclipse {
