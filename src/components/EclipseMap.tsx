@@ -2,9 +2,17 @@ import { useEffect, useRef } from "react";
 import type { Map as LeafletMap, Marker, Polyline } from "leaflet";
 import { calcularEclipse, type Ciudad } from "@/lib/eclipse-data";
 
+export interface SeleccionMapa {
+  titulo: string;
+  lat: number;
+  lon: number;
+}
+
 interface EclipseMapProps {
   // Cuando cambia, el mapa vuela a esta ciudad y abre su popup.
   destino: Ciudad | null;
+  // Se llama al hacer clic en el mapa o al volar a una ciudad.
+  onSeleccion?: (s: SeleccionMapa) => void;
 }
 
 function popupHtml(titulo: string, lat: number, lon: number): string {
@@ -58,11 +66,13 @@ function puntoEnDireccion(
 }
 
 
-export function EclipseMap({ destino }: EclipseMapProps) {
+export function EclipseMap({ destino, onSeleccion }: EclipseMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const markerRef = useRef<Marker | null>(null);
   const flechaRef = useRef<Polyline | null>(null);
+  const onSeleccionRef = useRef(onSeleccion);
+  onSeleccionRef.current = onSeleccion;
 
   // Dibuja la flecha amarilla apuntando hacia el Sol desde el punto dado.
   async function dibujarFlecha(lat: number, lon: number) {
@@ -111,7 +121,9 @@ export function EclipseMap({ destino }: EclipseMapProps) {
           .setContent(popupHtml("Ubicación seleccionada", lat, lng))
           .openOn(map);
         dibujarFlecha(lat, lng);
+        onSeleccionRef.current?.({ titulo: "Ubicación seleccionada", lat, lon: lng });
       });
+
 
 
       // Forzar recalculo de tamaño tras montar.
@@ -139,6 +151,11 @@ export function EclipseMap({ destino }: EclipseMapProps) {
         .openPopup();
       markerRef.current = marker;
       dibujarFlecha(destino.lat, destino.lon);
+      onSeleccionRef.current?.({
+        titulo: destino.nombre,
+        lat: destino.lat,
+        lon: destino.lon,
+      });
     })();
 
   }, [destino]);
@@ -146,7 +163,7 @@ export function EclipseMap({ destino }: EclipseMapProps) {
   return (
     <div
       ref={containerRef}
-      className="h-[58vh] min-h-[360px] w-full rounded-2xl border border-border"
+      className="h-full min-h-[320px] w-full rounded-2xl border border-border"
       style={{ boxShadow: "var(--shadow-glow)" }}
     />
   );
