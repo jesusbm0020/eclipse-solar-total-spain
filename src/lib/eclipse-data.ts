@@ -179,6 +179,6 @@ export function calcularEclipse(lat: number, lon: number): DatosEclipse {
     maximo: aHora(maxMin),
     oscurecimiento: Math.round(oscurecimiento * 10) / 10,
     tipo,
-    sol: posicionSol(lat, lon),
+    sol: posicionSol(lat, lon, maxMin),
   };
 }
