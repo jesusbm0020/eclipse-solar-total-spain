@@ -110,7 +110,9 @@ export function EclipseMap({ destino }: EclipseMapProps) {
           .setLatLng([lat, lng])
           .setContent(popupHtml("Ubicación seleccionada", lat, lng))
           .openOn(map);
+        dibujarFlecha(lat, lng);
       });
+
 
       // Forzar recalculo de tamaño tras montar.
       setTimeout(() => map.invalidateSize(), 200);
