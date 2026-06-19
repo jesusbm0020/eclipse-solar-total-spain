@@ -2,9 +2,17 @@ import { useEffect, useRef } from "react";
 import type { Map as LeafletMap, Marker, Polyline } from "leaflet";
 import { calcularEclipse, type Ciudad } from "@/lib/eclipse-data";
 
+export interface SeleccionMapa {
+  titulo: string;
+  lat: number;
+  lon: number;
+}
+
 interface EclipseMapProps {
   // Cuando cambia, el mapa vuela a esta ciudad y abre su popup.
   destino: Ciudad | null;
+  // Se llama al hacer clic en el mapa o al volar a una ciudad.
+  onSeleccion?: (s: SeleccionMapa) => void;
 }
 
 function popupHtml(titulo: string, lat: number, lon: number): string {
