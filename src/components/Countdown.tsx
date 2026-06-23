@@ -41,9 +41,12 @@ function Casilla({ valor, etiqueta }: { valor: number; etiqueta: string }) {
 }
 
 export function Countdown() {
-  const [r, setR] = useState<Restante>(calcularRestante);
+  const [r, setR] = useState<Restante>({ dias: 0, horas: 0, minutos: 0, segundos: 0, terminado: false });
+  const [montado, setMontado] = useState(false);
 
   useEffect(() => {
+    setMontado(true);
+    setR(calcularRestante());
     const id = setInterval(() => setR(calcularRestante()), 1000);
     return () => clearInterval(id);
   }, []);
@@ -51,13 +54,13 @@ export function Countdown() {
   return (
     <div className="rounded-2xl border border-border bg-card/40 p-4 backdrop-blur">
       <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-        {r.terminado ? "¡El eclipse ha comenzado!" : "Cuenta atrás para el eclipse"}
+        {montado && r.terminado ? "¡El eclipse ha comenzado!" : "Cuenta atrás para el eclipse"}
       </p>
       <div className="flex items-stretch gap-2">
-        <Casilla valor={r.dias} etiqueta="Días" />
-        <Casilla valor={r.horas} etiqueta="Horas" />
-        <Casilla valor={r.minutos} etiqueta="Min" />
-        <Casilla valor={r.segundos} etiqueta="Seg" />
+        <Casilla valor={montado ? r.dias : 0} etiqueta="Días" />
+        <Casilla valor={montado ? r.horas : 0} etiqueta="Horas" />
+        <Casilla valor={montado ? r.minutos : 0} etiqueta="Min" />
+        <Casilla valor={montado ? r.segundos : 0} etiqueta="Seg" />
       </div>
     </div>
   );

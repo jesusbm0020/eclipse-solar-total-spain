@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Search, Sun, Glasses, MapPin, Loader2, Compass } from "lucide-react";
+import { Search, Sun, Glasses, MapPin, Loader2, Compass, X } from "lucide-react";
 import { EclipseMap, type SeleccionMapa } from "@/components/EclipseMap";
 import { Countdown } from "@/components/Countdown";
 import { calcularEclipse, type Ciudad } from "@/lib/eclipse-data";
@@ -28,14 +28,33 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function AdBanner({ etiqueta }: { etiqueta: string }) {
+function AdBanner() {
   return (
     <div
       role="complementary"
       aria-label="Espacio publicitario"
-      className="flex h-20 w-full items-center justify-center rounded-2xl border border-dashed border-border bg-card/40 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+      className="h-20 w-full rounded-2xl border border-dashed border-border/40 bg-transparent"
+    />
+  );
+}
+
+function AdBannerInferior() {
+  const [cerrado, setCerrado] = useState(false);
+  if (cerrado) return null;
+  return (
+    <div
+      role="complementary"
+      aria-label="Espacio publicitario inferior"
+      className="fixed bottom-0 left-0 z-[900] flex h-[50px] w-full items-center justify-center bg-background/85 backdrop-blur sm:h-[60px] lg:h-[90px]"
     >
-      <span className="opacity-70">{etiqueta}</span>
+      <button
+        type="button"
+        onClick={() => setCerrado(true)}
+        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground transition-colors hover:text-foreground"
+        aria-label="Cerrar anuncio"
+      >
+        <X className="h-4 w-4" />
+      </button>
     </div>
   );
 }
@@ -249,7 +268,7 @@ function Index() {
       <PanelDatos seleccion={seleccion} />
 
       {/* Banner publicitario */}
-      <AdBanner etiqueta="Espacio para Google AdSense" />
+      <AdBanner />
 
       {/* CTA */}
       <Button
@@ -283,7 +302,7 @@ function Index() {
         {/* === Escritorio/Tablet: split screen === */}
         <div className="hidden h-screen lg:grid lg:grid-cols-[minmax(360px,440px)_1fr]">
           {/* Panel de información (columna scrollable) */}
-          <aside className="flex h-screen flex-col gap-5 overflow-y-auto border-r border-border px-6 py-8">
+          <aside className="flex h-screen flex-col gap-5 overflow-y-auto border-r border-border px-6 pt-8 pb-28">
             {panel}
           </aside>
           {/* Mapa a pantalla completa */}
@@ -294,7 +313,7 @@ function Index() {
 
         {/* === Móvil: vertical === */}
         <div className="lg:hidden">
-          <div className="mx-auto flex max-w-xl flex-col gap-5 px-4 pb-12 pt-8">
+          <div className="mx-auto flex max-w-xl flex-col gap-5 px-4 pb-32 pt-8">
             {panel}
             <div className="h-[58vh] min-h-[360px]">
               <EclipseMap destino={destino} onSeleccion={setSeleccion} />
@@ -305,6 +324,7 @@ function Index() {
           </div>
         </div>
       </div>
+      <AdBannerInferior />
     </main>
   );
 }
