@@ -313,7 +313,7 @@ function Index() {
 
         {/* === Móvil: vertical === */}
         <div className="lg:hidden">
-          <div className="mx-auto flex max-w-xl flex-col gap-5 px-4 pb-12 pt-8">
+          <div className="mx-auto flex max-w-xl flex-col gap-5 px-4 pb-32 pt-8">
             {panel}
             <div className="h-[58vh] min-h-[360px]">
               <EclipseMap destino={destino} onSeleccion={setSeleccion} />
