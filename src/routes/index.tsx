@@ -28,14 +28,33 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function AdBanner({ etiqueta }: { etiqueta: string }) {
+function AdBanner() {
   return (
     <div
       role="complementary"
       aria-label="Espacio publicitario"
-      className="flex h-20 w-full items-center justify-center rounded-2xl border border-dashed border-border bg-card/40 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+      className="h-20 w-full rounded-2xl border border-dashed border-border/40 bg-transparent"
+    />
+  );
+}
+
+function AdBannerInferior() {
+  const [cerrado, setCerrado] = useState(false);
+  if (cerrado) return null;
+  return (
+    <div
+      role="complementary"
+      aria-label="Espacio publicitario inferior"
+      className="fixed bottom-0 left-0 z-[900] flex h-[50px] w-full items-center justify-center bg-background/85 backdrop-blur sm:h-[60px] lg:h-[90px]"
     >
-      <span className="opacity-70">{etiqueta}</span>
+      <button
+        type="button"
+        onClick={() => setCerrado(true)}
+        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground transition-colors hover:text-foreground"
+        aria-label="Cerrar anuncio"
+      >
+        <X className="h-4 w-4" />
+      </button>
     </div>
   );
 }
