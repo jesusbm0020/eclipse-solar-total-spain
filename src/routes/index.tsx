@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Search, Sun, Glasses, MapPin, Loader2, Compass } from "lucide-react";
+import { Search, Sun, Glasses, MapPin, Loader2, Compass, X } from "lucide-react";
 import { EclipseMap, type SeleccionMapa } from "@/components/EclipseMap";
 import { Countdown } from "@/components/Countdown";
 import { calcularEclipse, type Ciudad } from "@/lib/eclipse-data";
