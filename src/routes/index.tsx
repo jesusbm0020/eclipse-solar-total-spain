@@ -268,7 +268,7 @@ function Index() {
       <PanelDatos seleccion={seleccion} />
 
       {/* Banner publicitario */}
-      <AdBanner etiqueta="Espacio para Google AdSense" />
+      <AdBanner />
 
       {/* CTA */}
       <Button
