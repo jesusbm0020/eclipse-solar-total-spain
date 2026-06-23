@@ -324,6 +324,7 @@ function Index() {
           </div>
         </div>
       </div>
+      <AdBannerInferior />
     </main>
   );
 }
