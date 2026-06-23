@@ -302,7 +302,7 @@ function Index() {
         {/* === Escritorio/Tablet: split screen === */}
         <div className="hidden h-screen lg:grid lg:grid-cols-[minmax(360px,440px)_1fr]">
           {/* Panel de información (columna scrollable) */}
-          <aside className="flex h-screen flex-col gap-5 overflow-y-auto border-r border-border px-6 py-8">
+          <aside className="flex h-screen flex-col gap-5 overflow-y-auto border-r border-border px-6 pt-8 pb-28">
             {panel}
           </aside>
           {/* Mapa a pantalla completa */}
