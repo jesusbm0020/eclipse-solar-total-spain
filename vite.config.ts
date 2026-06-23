@@ -8,5 +8,7 @@ export default defineConfig({
   },
   vite: {
     base: "/",
+    plugins: [],
   },
+  plugins: [],
 });
