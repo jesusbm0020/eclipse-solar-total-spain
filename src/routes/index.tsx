@@ -325,6 +325,28 @@ function Index() {
         </div>
       </div>
       <AdBannerInferior />
+      {/* Bloque de Texto Estratégico para SEO */}
+    <section className="max-w-4xl mx-auto px-4 py-12 text-gray-300 space-y-6">
+      <h2 className="text-3xl font-bold text-white">Guía del Eclipse Solar Total 2026 en España</h2>
+      <p>
+        El <strong>12 de agosto de 2026</strong>, España será el escenario de uno de los eventos astronómicos más importantes del siglo: un <strong>eclipse solar total</strong>. La sombra de la totalidad cruzará el norte y centro de la península ibérica, ofreciendo un espectáculo único donde el día se convertirá por completo en noche durante unos minutos.
+      </p>
+
+      <h3 className="text-xl font-semibold text-amber-400 mt-6">¿Dónde ver el eclipse de 2026 en directo?</h3>
+      <p>
+        La franja de totalidad (donde el sol quedará oculto al 100%) tendrá un ancho de unos 290 km. Cruzará comunidades autónomas como <strong>Galicia, Asturias, Cantabria, Castilla y León, País Vasco, La Rioja, Navarra, Aragón, Cataluña, Comunidad Valenciana y Castilla-La Mancha</strong>, además de las Islas Baleares. Ciudades principales como Oviedo, Santander, Burgos, Zaragoza, Castellón de la Plana y Palma de Mallorca experimentarán la oscuridad total.
+      </p>
+
+      <h3 className="text-xl font-semibold text-amber-400 mt-6">Cómo usar nuestro Mapa Interactivo del Eclipse</h3>
+      <p>
+        Nuestro <strong>mapa del eclipse de 2026</strong> en tiempo real te permite hacer clic en cualquier municipio o activar tu ubicación para conocer datos cruciales: los horarios exactos del inicio del eclipse parcial, el comienzo de la fase de totalidad, la duración exacta de la oscuridad máxima y el porcentaje de oscurecimiento si te encuentras fuera de la trayectoria central.
+      </p>
+
+      <h3 className="text-xl font-semibold text-amber-400 mt-6">Horarios generales y recomendaciones de observación</h3>
+      <p>
+        El fenómeno ocurrirá a última hora de la tarde, muy cerca de la puesta de sol (entre las 19:30 y las 21:00 hora local, dependiendo de la provincia). Recuerda que para observar las fases parciales es estrictamente obligatorio el uso de <strong>gafas de eclipse homologadas</strong> (certificación ISO 12312-2) para evitar daños oculares irreversibles.
+      </p>
+    </section>
     </main>
   );
 }
