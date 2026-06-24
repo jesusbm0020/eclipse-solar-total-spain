@@ -270,21 +270,21 @@ function Index() {
       {/* Banner publicitario */}
       <AdBanner />
 
-      {/* CTA */}
-      <Button
-        variant="eclipse"
-        size="lg"
-        className="font-display h-14 w-full rounded-2xl text-base font-bold"
-        onClick={() =>
-          window.open(
-            "https://www.amazon.es/s?k=gafas+eclipse+solar+homologadas+iso&tag=eclipse202604-21",
-            "_blank",
-          )
-        }
-      >
-        <Glasses className="mr-2 h-5 w-5" />
-        Comprar Gafas de Eclipse Homologadas
-      </Button>
+  {/* CTA */}
+    <Button
+      variant="eclipse"
+      size="lg"
+      className="font-display min-h-[3.5rem] h-auto py-3 w-full rounded-2xl text-base font-bold whitespace-normal flex items-center justify-center text-center px-4"
+      onClick={() => {
+        window.open(
+          "https://www.amazon.es/s?k=gafas+eclipse+solar+homologadas+iso&tag=eclipse202604-21",
+          "_blank"
+        )
+      }}
+    >
+      <Glasses className="mr-2 h-5 w-5 shrink-0" />
+      <span>Comprar Gafas de Eclipse Homologadas</span>
+    </Button>
 
       <p className="text-center text-[11px] leading-relaxed text-muted-foreground">
         ⚠️ Nunca mires al sol directamente sin protección homologada (ISO
