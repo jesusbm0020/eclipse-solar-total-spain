@@ -328,6 +328,12 @@ function Index() {
       {/* Bloque de Texto Estratégico para SEO */}
     <section className="max-w-4xl mx-auto px-4 py-12 text-gray-300 space-y-6">
       <h2 className="text-3xl font-bold text-white">Guía del Eclipse Solar Total 2026 en España</h2>
+      {/* IMAGEN OPTIMIZADA PARA GOOGLE IMÁGENES */}
+      <img 
+        src="/mapa-eclipse-solar-total-2026-espana.png" 
+        alt="Mapa interactivo de la trayectoria del eclipse solar total del 12 de agosto de 2026 en España" 
+        className="w-full h-auto rounded-xl my-6 border border-gray-800 shadow-2xl"
+      />
       <p>
         El <strong>12 de agosto de 2026</strong>, España será el escenario de uno de los eventos astronómicos más importantes del siglo: un <strong>eclipse solar total</strong>. La sombra de la totalidad cruzará el norte y centro de la península ibérica, ofreciendo un espectáculo único donde el día se convertirá por completo en noche durante unos minutos.
       </p>
