@@ -124,6 +124,9 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="es">
       <head>
         <HeadContent />
+        {/* Verificación de Google Search Console */}
+        <meta name="google-site-verification" content="Urm2eyYDRlzrxcitwGv03Y427MJmw838q41hzETvpI4" />
+        
         {/* SEO Básico */}
         <title>Eclipse Solar Total España 2026 | Mapa Interactivo y Horarios</title>
         <meta name="description" content="Explora el mapa interactivo del eclipse solar total del 12 de agosto de 2026 en España. Consulta los horarios exactos, el porcentaje de oscurecimiento y la cuenta atrás en vivo por ciudades." />
