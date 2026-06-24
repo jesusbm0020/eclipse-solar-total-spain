@@ -121,9 +121,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <HeadContent />
+        {/* SEO Básico */}
+        <title>Eclipse Solar Total España 2026 | Mapa Interactivo y Horarios</title>
+        <meta name="description" content="Explora el mapa interactivo del eclipse solar total del 12 de agosto de 2026 en España. Consulta los horarios exactos, el porcentaje de oscurecimiento y la cuenta atrás en vivo por ciudades." />
+        <meta name="keywords" content="eclipse solar 2026, eclipse solar total españa, mapa eclipse 2026, horarios eclipse españa, ver eclipse galicia asturias leon cantabria" />
+        
+        {/* Open Graph (Para que quede brutal cuando lo compartas por WhatsApp, Twitter o LinkedIn) */}
+        <meta property="og:title" content="Eclipse Solar Total España 2026 | Mapa Interactivo" />
+        <meta property="og:description" content="Consulta los horarios exactos y el porcentaje de oscurecimiento en tu ciudad con nuestro mapa interactivo en vivo." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mapaeclipse2026.es" />
+
+        {/* Script de Google AdSense */}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6998824963198534" crossOrigin="anonymous" />
       </head>
       <body>
