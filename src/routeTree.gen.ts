@@ -9,38 +9,137 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PrivacidadRouteImport } from './routes/privacidad'
+import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogMejoresLugaresVerEclipseEspanaRouteImport } from './routes/blog.mejores-lugares-ver-eclipse-espana'
+import { Route as BlogGafasHomologadasEclipse2026RouteImport } from './routes/blog.gafas-homologadas-eclipse-2026'
+import { Route as BlogComoFotografiarEclipseSolarRouteImport } from './routes/blog.como-fotografiar-eclipse-solar'
 
+const PrivacidadRoute = PrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogMejoresLugaresVerEclipseEspanaRoute =
+  BlogMejoresLugaresVerEclipseEspanaRouteImport.update({
+    id: '/blog/mejores-lugares-ver-eclipse-espana',
+    path: '/blog/mejores-lugares-ver-eclipse-espana',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogGafasHomologadasEclipse2026Route =
+  BlogGafasHomologadasEclipse2026RouteImport.update({
+    id: '/blog/gafas-homologadas-eclipse-2026',
+    path: '/blog/gafas-homologadas-eclipse-2026',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogComoFotografiarEclipseSolarRoute =
+  BlogComoFotografiarEclipseSolarRouteImport.update({
+    id: '/blog/como-fotografiar-eclipse-solar',
+    path: '/blog/como-fotografiar-eclipse-solar',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/privacidad': typeof PrivacidadRoute
+  '/blog/como-fotografiar-eclipse-solar': typeof BlogComoFotografiarEclipseSolarRoute
+  '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
+  '/blog/mejores-lugares-ver-eclipse-espana': typeof BlogMejoresLugaresVerEclipseEspanaRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/privacidad': typeof PrivacidadRoute
+  '/blog/como-fotografiar-eclipse-solar': typeof BlogComoFotografiarEclipseSolarRoute
+  '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
+  '/blog/mejores-lugares-ver-eclipse-espana': typeof BlogMejoresLugaresVerEclipseEspanaRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/privacidad': typeof PrivacidadRoute
+  '/blog/como-fotografiar-eclipse-solar': typeof BlogComoFotografiarEclipseSolarRoute
+  '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
+  '/blog/mejores-lugares-ver-eclipse-espana': typeof BlogMejoresLugaresVerEclipseEspanaRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contacto'
+    | '/privacidad'
+    | '/blog/como-fotografiar-eclipse-solar'
+    | '/blog/gafas-homologadas-eclipse-2026'
+    | '/blog/mejores-lugares-ver-eclipse-espana'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contacto'
+    | '/privacidad'
+    | '/blog/como-fotografiar-eclipse-solar'
+    | '/blog/gafas-homologadas-eclipse-2026'
+    | '/blog/mejores-lugares-ver-eclipse-espana'
+    | '/blog'
+  id:
+    | '__root__'
+    | '/'
+    | '/contacto'
+    | '/privacidad'
+    | '/blog/como-fotografiar-eclipse-solar'
+    | '/blog/gafas-homologadas-eclipse-2026'
+    | '/blog/mejores-lugares-ver-eclipse-espana'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactoRoute: typeof ContactoRoute
+  PrivacidadRoute: typeof PrivacidadRoute
+  BlogComoFotografiarEclipseSolarRoute: typeof BlogComoFotografiarEclipseSolarRoute
+  BlogGafasHomologadasEclipse2026Route: typeof BlogGafasHomologadasEclipse2026Route
+  BlogMejoresLugaresVerEclipseEspanaRoute: typeof BlogMejoresLugaresVerEclipseEspanaRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/privacidad': {
+      id: '/privacidad'
+      path: '/privacidad'
+      fullPath: '/privacidad'
+      preLoaderRoute: typeof PrivacidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +147,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/mejores-lugares-ver-eclipse-espana': {
+      id: '/blog/mejores-lugares-ver-eclipse-espana'
+      path: '/blog/mejores-lugares-ver-eclipse-espana'
+      fullPath: '/blog/mejores-lugares-ver-eclipse-espana'
+      preLoaderRoute: typeof BlogMejoresLugaresVerEclipseEspanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/gafas-homologadas-eclipse-2026': {
+      id: '/blog/gafas-homologadas-eclipse-2026'
+      path: '/blog/gafas-homologadas-eclipse-2026'
+      fullPath: '/blog/gafas-homologadas-eclipse-2026'
+      preLoaderRoute: typeof BlogGafasHomologadasEclipse2026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/como-fotografiar-eclipse-solar': {
+      id: '/blog/como-fotografiar-eclipse-solar'
+      path: '/blog/como-fotografiar-eclipse-solar'
+      fullPath: '/blog/como-fotografiar-eclipse-solar'
+      preLoaderRoute: typeof BlogComoFotografiarEclipseSolarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactoRoute: ContactoRoute,
+  PrivacidadRoute: PrivacidadRoute,
+  BlogComoFotografiarEclipseSolarRoute: BlogComoFotografiarEclipseSolarRoute,
+  BlogGafasHomologadasEclipse2026Route: BlogGafasHomologadasEclipse2026Route,
+  BlogMejoresLugaresVerEclipseEspanaRoute:
+    BlogMejoresLugaresVerEclipseEspanaRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
