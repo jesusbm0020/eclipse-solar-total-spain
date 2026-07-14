@@ -72,8 +72,7 @@ function BlogIndex() {
         {articulos.map((a) => (
           <li key={a.slug}>
             <Link
-              to="/blog/$slug"
-              params={{ slug: a.slug }}
+              to={`/blog/${a.slug}` as "/blog"}
               className="group flex h-full flex-col rounded-2xl border border-border bg-card/40 p-6 backdrop-blur transition-colors hover:border-primary/60"
             >
               <span className="w-fit rounded-full bg-primary/15 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-primary">
