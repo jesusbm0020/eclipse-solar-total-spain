@@ -13,6 +13,7 @@ import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogMejoresLugaresVerEclipseEspanaRouteImport } from './routes/blog.mejores-lugares-ver-eclipse-espana'
 import { Route as BlogGafasHomologadasEclipse2026RouteImport } from './routes/blog.gafas-homologadas-eclipse-2026'
 
 const PrivacidadRoute = PrivacidadRouteImport.update({
@@ -35,6 +36,12 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogMejoresLugaresVerEclipseEspanaRoute =
+  BlogMejoresLugaresVerEclipseEspanaRouteImport.update({
+    id: '/blog/mejores-lugares-ver-eclipse-espana',
+    path: '/blog/mejores-lugares-ver-eclipse-espana',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogGafasHomologadasEclipse2026Route =
   BlogGafasHomologadasEclipse2026RouteImport.update({
     id: '/blog/gafas-homologadas-eclipse-2026',
@@ -47,6 +54,7 @@ export interface FileRoutesByFullPath {
   '/contacto': typeof ContactoRoute
   '/privacidad': typeof PrivacidadRoute
   '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
+  '/blog/mejores-lugares-ver-eclipse-espana': typeof BlogMejoresLugaresVerEclipseEspanaRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
@@ -54,6 +62,7 @@ export interface FileRoutesByTo {
   '/contacto': typeof ContactoRoute
   '/privacidad': typeof PrivacidadRoute
   '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
+  '/blog/mejores-lugares-ver-eclipse-espana': typeof BlogMejoresLugaresVerEclipseEspanaRoute
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
@@ -62,6 +71,7 @@ export interface FileRoutesById {
   '/contacto': typeof ContactoRoute
   '/privacidad': typeof PrivacidadRoute
   '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
+  '/blog/mejores-lugares-ver-eclipse-espana': typeof BlogMejoresLugaresVerEclipseEspanaRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
@@ -71,6 +81,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/privacidad'
     | '/blog/gafas-homologadas-eclipse-2026'
+    | '/blog/mejores-lugares-ver-eclipse-espana'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -78,6 +89,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/privacidad'
     | '/blog/gafas-homologadas-eclipse-2026'
+    | '/blog/mejores-lugares-ver-eclipse-espana'
     | '/blog'
   id:
     | '__root__'
@@ -85,6 +97,7 @@ export interface FileRouteTypes {
     | '/contacto'
     | '/privacidad'
     | '/blog/gafas-homologadas-eclipse-2026'
+    | '/blog/mejores-lugares-ver-eclipse-espana'
     | '/blog/'
   fileRoutesById: FileRoutesById
 }
@@ -93,6 +106,7 @@ export interface RootRouteChildren {
   ContactoRoute: typeof ContactoRoute
   PrivacidadRoute: typeof PrivacidadRoute
   BlogGafasHomologadasEclipse2026Route: typeof BlogGafasHomologadasEclipse2026Route
+  BlogMejoresLugaresVerEclipseEspanaRoute: typeof BlogMejoresLugaresVerEclipseEspanaRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
@@ -126,6 +140,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/mejores-lugares-ver-eclipse-espana': {
+      id: '/blog/mejores-lugares-ver-eclipse-espana'
+      path: '/blog/mejores-lugares-ver-eclipse-espana'
+      fullPath: '/blog/mejores-lugares-ver-eclipse-espana'
+      preLoaderRoute: typeof BlogMejoresLugaresVerEclipseEspanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/gafas-homologadas-eclipse-2026': {
       id: '/blog/gafas-homologadas-eclipse-2026'
       path: '/blog/gafas-homologadas-eclipse-2026'
@@ -141,6 +162,8 @@ const rootRouteChildren: RootRouteChildren = {
   ContactoRoute: ContactoRoute,
   PrivacidadRoute: PrivacidadRoute,
   BlogGafasHomologadasEclipse2026Route: BlogGafasHomologadasEclipse2026Route,
+  BlogMejoresLugaresVerEclipseEspanaRoute:
+    BlogMejoresLugaresVerEclipseEspanaRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
