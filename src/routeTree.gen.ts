@@ -13,6 +13,7 @@ import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogGafasHomologadasEclipse2026RouteImport } from './routes/blog.gafas-homologadas-eclipse-2026'
 
 const PrivacidadRoute = PrivacidadRouteImport.update({
   id: '/privacidad',
@@ -34,17 +35,25 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogGafasHomologadasEclipse2026Route =
+  BlogGafasHomologadasEclipse2026RouteImport.update({
+    id: '/blog/gafas-homologadas-eclipse-2026',
+    path: '/blog/gafas-homologadas-eclipse-2026',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/privacidad': typeof PrivacidadRoute
+  '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/privacidad': typeof PrivacidadRoute
+  '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
   '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
@@ -52,20 +61,38 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/privacidad': typeof PrivacidadRoute
+  '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contacto' | '/privacidad' | '/blog/'
+  fullPaths:
+    | '/'
+    | '/contacto'
+    | '/privacidad'
+    | '/blog/gafas-homologadas-eclipse-2026'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contacto' | '/privacidad' | '/blog'
-  id: '__root__' | '/' | '/contacto' | '/privacidad' | '/blog/'
+  to:
+    | '/'
+    | '/contacto'
+    | '/privacidad'
+    | '/blog/gafas-homologadas-eclipse-2026'
+    | '/blog'
+  id:
+    | '__root__'
+    | '/'
+    | '/contacto'
+    | '/privacidad'
+    | '/blog/gafas-homologadas-eclipse-2026'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactoRoute: typeof ContactoRoute
   PrivacidadRoute: typeof PrivacidadRoute
+  BlogGafasHomologadasEclipse2026Route: typeof BlogGafasHomologadasEclipse2026Route
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
@@ -99,6 +126,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/gafas-homologadas-eclipse-2026': {
+      id: '/blog/gafas-homologadas-eclipse-2026'
+      path: '/blog/gafas-homologadas-eclipse-2026'
+      fullPath: '/blog/gafas-homologadas-eclipse-2026'
+      preLoaderRoute: typeof BlogGafasHomologadasEclipse2026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -106,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactoRoute: ContactoRoute,
   PrivacidadRoute: PrivacidadRoute,
+  BlogGafasHomologadasEclipse2026Route: BlogGafasHomologadasEclipse2026Route,
   BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
