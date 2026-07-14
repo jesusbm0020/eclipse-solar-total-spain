@@ -71,8 +71,8 @@ function BlogIndex() {
       <ul className="mt-10 grid gap-5 md:grid-cols-2">
         {articulos.map((a) => (
           <li key={a.slug}>
-            <Link
-              to={`/blog/${a.slug}` as "/blog"}
+            <a
+              href={`/blog/${a.slug}`}
               className="group flex h-full flex-col rounded-2xl border border-border bg-card/40 p-6 backdrop-blur transition-colors hover:border-primary/60"
             >
               <span className="w-fit rounded-full bg-primary/15 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-primary">
@@ -86,7 +86,7 @@ function BlogIndex() {
                 Leer artículo
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </span>
-            </Link>
+            </a>
           </li>
         ))}
       </ul>
