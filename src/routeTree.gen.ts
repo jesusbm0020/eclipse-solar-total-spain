@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogMejoresLugaresVerEclipseEspanaRouteImport } from './routes/blog.mejores-lugares-ver-eclipse-espana'
 import { Route as BlogGafasHomologadasEclipse2026RouteImport } from './routes/blog.gafas-homologadas-eclipse-2026'
+import { Route as BlogComoFotografiarEclipseSolarRouteImport } from './routes/blog.como-fotografiar-eclipse-solar'
 
 const PrivacidadRoute = PrivacidadRouteImport.update({
   id: '/privacidad',
@@ -48,11 +49,18 @@ const BlogGafasHomologadasEclipse2026Route =
     path: '/blog/gafas-homologadas-eclipse-2026',
     getParentRoute: () => rootRouteImport,
   } as any)
+const BlogComoFotografiarEclipseSolarRoute =
+  BlogComoFotografiarEclipseSolarRouteImport.update({
+    id: '/blog/como-fotografiar-eclipse-solar',
+    path: '/blog/como-fotografiar-eclipse-solar',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/privacidad': typeof PrivacidadRoute
+  '/blog/como-fotografiar-eclipse-solar': typeof BlogComoFotografiarEclipseSolarRoute
   '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
   '/blog/mejores-lugares-ver-eclipse-espana': typeof BlogMejoresLugaresVerEclipseEspanaRoute
   '/blog/': typeof BlogIndexRoute
@@ -61,6 +69,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/privacidad': typeof PrivacidadRoute
+  '/blog/como-fotografiar-eclipse-solar': typeof BlogComoFotografiarEclipseSolarRoute
   '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
   '/blog/mejores-lugares-ver-eclipse-espana': typeof BlogMejoresLugaresVerEclipseEspanaRoute
   '/blog': typeof BlogIndexRoute
@@ -70,6 +79,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/privacidad': typeof PrivacidadRoute
+  '/blog/como-fotografiar-eclipse-solar': typeof BlogComoFotografiarEclipseSolarRoute
   '/blog/gafas-homologadas-eclipse-2026': typeof BlogGafasHomologadasEclipse2026Route
   '/blog/mejores-lugares-ver-eclipse-espana': typeof BlogMejoresLugaresVerEclipseEspanaRoute
   '/blog/': typeof BlogIndexRoute
@@ -80,6 +90,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contacto'
     | '/privacidad'
+    | '/blog/como-fotografiar-eclipse-solar'
     | '/blog/gafas-homologadas-eclipse-2026'
     | '/blog/mejores-lugares-ver-eclipse-espana'
     | '/blog/'
@@ -88,6 +99,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contacto'
     | '/privacidad'
+    | '/blog/como-fotografiar-eclipse-solar'
     | '/blog/gafas-homologadas-eclipse-2026'
     | '/blog/mejores-lugares-ver-eclipse-espana'
     | '/blog'
@@ -96,6 +108,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contacto'
     | '/privacidad'
+    | '/blog/como-fotografiar-eclipse-solar'
     | '/blog/gafas-homologadas-eclipse-2026'
     | '/blog/mejores-lugares-ver-eclipse-espana'
     | '/blog/'
@@ -105,6 +118,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactoRoute: typeof ContactoRoute
   PrivacidadRoute: typeof PrivacidadRoute
+  BlogComoFotografiarEclipseSolarRoute: typeof BlogComoFotografiarEclipseSolarRoute
   BlogGafasHomologadasEclipse2026Route: typeof BlogGafasHomologadasEclipse2026Route
   BlogMejoresLugaresVerEclipseEspanaRoute: typeof BlogMejoresLugaresVerEclipseEspanaRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -154,6 +168,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogGafasHomologadasEclipse2026RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/como-fotografiar-eclipse-solar': {
+      id: '/blog/como-fotografiar-eclipse-solar'
+      path: '/blog/como-fotografiar-eclipse-solar'
+      fullPath: '/blog/como-fotografiar-eclipse-solar'
+      preLoaderRoute: typeof BlogComoFotografiarEclipseSolarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -161,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactoRoute: ContactoRoute,
   PrivacidadRoute: PrivacidadRoute,
+  BlogComoFotografiarEclipseSolarRoute: BlogComoFotografiarEclipseSolarRoute,
   BlogGafasHomologadasEclipse2026Route: BlogGafasHomologadasEclipse2026Route,
   BlogMejoresLugaresVerEclipseEspanaRoute:
     BlogMejoresLugaresVerEclipseEspanaRoute,
